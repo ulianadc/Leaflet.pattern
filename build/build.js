@@ -157,7 +157,7 @@ exports.build = function (compsBase32, buildName) {
 
 exports.test = function() {
 	var karma = require('karma'),
-	    testConfig = {configFile : __dirname + '/../spec/karma.conf.js'};
+	    testConfig = karma.config.parseConfig(__dirname + '/../spec/karma.conf.js');
 
 	testConfig.browsers = ['PhantomJS'];
 
@@ -185,7 +185,7 @@ exports.test = function() {
 		testConfig.reporters = ['coverage'];
 	}
 
-	karma.server.start(testConfig);
+	new karma.Server(testConfig).start();
 
 	function isArgv(optName) {
 		return process.argv.indexOf(optName) !== -1;
